@@ -218,10 +218,10 @@
             }).toDestination();
             dissonanceNoise.volume.value = -5;
             
-           ;
+            audioInitialized = true;
         }
 
-        audioInitialized = true // Create starfield background
+        // Create starfield background
         function createStarfield() {
             const starGeometry = new THREE.BufferGeometry();
             const starCount = 200;
@@ -465,8 +465,12 @@
                 state.nodes.push(node);
                 
                 // Play placement sound
-                if (audioInitialized) {
-                    noteSynth.triggerAttackRelease(440 * node.userData.frequency, 0.1);
+                if (audioInitialized && noteSynth) {
+                    try {
+                        noteSynth.triggerAttackRelease(440 * node.userData.frequency, 0.1);
+                    } catch (e) {
+                        console.warn('Audio playback error:', e);
+                    }
                 }
             }
         }
@@ -533,8 +537,12 @@
             
             // Update oscillator frequency based on waveform
             if (audioInitialized && waveOsc) {
-                const avgY = waveformPoints.reduce((sum, p) => sum + p.y, 0) / waveformLineCount;
-                waveOsc.frequency.rampTo(220 + avgY * 100, 0.1);
+                try {
+                    const avgY = waveformPoints.reduce((sum, p) => sum + p.y, 0) / waveformLineCount;
+                    waveOsc.frequency.rampTo(220 + avgY * 100, 0.1);
+                } catch (e) {
+                    console.warn('Audio frequency update error:', e);
+                }
             }
         }
 
@@ -603,16 +611,24 @@
                 }
                 
                 // Play chord
-                if (audioInitialized) {
-                    chordSynth.triggerAttackRelease(['C4', 'E4', 'G4'], '8n');
+                if (audioInitialized && chordSynth) {
+                    try {
+                        chordSynth.triggerAttackRelease(['C4', 'E4', 'G4'], '8n');
+                    } catch (e) {
+                        console.warn('Audio playback error:', e);
+                    }
                 }
                 
                 createParticleBurst(note.position.x, note.position.y, 0xffd700, 20);
             } else {
                 // Normal collection
                 state.score += 10;
-                if (audioInitialized) {
-                    noteSynth.triggerAttackRelease(440, '16n');
+                if (audioInitialized && noteSynth) {
+                    try {
+                        noteSynth.triggerAttackRelease(440, '16n');
+                    } catch (e) {
+                        console.warn('Audio playback error:', e);
+                    }
                 }
                 createParticleBurst(note.position.x, note.position.y, 0x00ffff, 10);
             }
@@ -641,8 +657,12 @@
             
             comboEl.classList.remove('visible');
             
-            if (audioInitialized) {
-                dissonanceNoise.triggerAttackRelease('8n');
+            if (audioInitialized && dissonanceNoise) {
+                try {
+                    dissonanceNoise.triggerAttackRelease('8n');
+                } catch (e) {
+                    console.warn('Audio playback error:', e);
+                }
             }
             
             createParticleBurst(x, y, 0xdc143c, 15);
