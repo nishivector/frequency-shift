@@ -1,5 +1,7 @@
 # Frequency Shift
 
+*In the year 2847, the Harmonic Engine—a device that could translate emotion into music—went silent. The great resonance towers that once sang with the collective feelings of humanity now stand dormant. You are a Frequency Shifter, trained to reignite the Engine by manipulating raw waveforms and restoring harmony to a world that has forgotten the sound of joy.*
+
 A musical puzzle game where you manipulate waveforms to create harmonics and collect notes.
 
 ![Gameplay](screenshot.png)
@@ -25,6 +27,10 @@ A musical puzzle game where you manipulate waveforms to create harmonics and col
 - Combo system
 - Difficulty progression
 - Synthesized audio using Tone.js
+
+## Story
+
+In the year 2847, the Harmonic Engine—a device that could translate emotion into music—went silent. The great resonance towers that once sang with the collective feelings of humanity now stand dormant. You are a Frequency Shifter, trained to reignite the Engine by manipulating raw waveforms and restoring harmony to a world that has forgotten the sound of joy.
 
 ## Links
 
